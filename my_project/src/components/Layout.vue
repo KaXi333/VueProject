@@ -15,7 +15,9 @@
       </div>
     </div>
     <div class="app-content">
+      <keep-alive>
         <router-view></router-view>
+      </keep-alive>
     </div>
     <div class="app-foot">@ 2018 fishenal</div>
   </div>
@@ -31,11 +33,6 @@ export default {
 </script>
 
 <style>
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
