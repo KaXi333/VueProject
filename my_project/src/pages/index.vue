@@ -16,71 +16,156 @@
       <div class="index-left-block lastest-news">
         <h2>最新消息</h2>
         <ul>
+        	<li v-for="item in newsList">
+        		<a :href="item.url">{{item.title}}</a>
+        	</li>
         </ul>
       </div>
     </div>
-    <!-- <div class="index-right">
-      <slide-show :slides="slides"></slide-show>
-      <div class="index-board-list">
-          
-      </div>
-    </div> -->
+    <div class="index-right">
+        <slide-show :slides="slides" :inv="slideSpeed"></slide-show>	
+	    <div class="index-board-list">
+	        <div class="index-board-item" v-for="(item,index) in boardList" :class="[{'line-last' : index % 2 !== 0},'index-board-'+item.id]">
+	         	<div class="index-board-item-inner">
+	         		<h2>{{item.title}}</h2>
+	         		<p>{{item.description}}</p>
+	         		<a href="" class="button">立即购买</a>
+	         	</div>
+	        </div> 
+	    </div>
+    </div>
   </div>
 </template>
 
 <script>
+import slideShow from '../components/slideShow'
 export default {
-  data () {
-    return {
-    	productList:{
-    		pc:{
-    			title:"pc产品",
-    			list:[
-	    			{
-		              name: '数据统计',
-		              url: 'http://starcraft.com'
-		            },
-		            {
-		              name: '数据预测',
-		              url: 'http://warcraft.com'
-		            },
-		            {
-		              name: '流量分析',
-		              url: 'http://overwatch.com',
-		              hot: true
-		            },
-		            {
-		              name: '广告发布',
-		              url: 'http://hearstone.com'
-		            }
-    			]
-    		},
-    		app:{
-    			title:"手机应用类",
-    			last:true,
-    			list:[
-	    			{
-		              name: '91助手',
-		              url: 'http://weixin.com'
-		            },
-		            {
-		              name: '产品助手',
-		              url: 'http://twitter.com',
-		              hot: true
-		            },
-		            {
-		              name: '智能地图',
-		              url: 'http://maps.com'
-		            },
-		            {
-		              name: '团队语音',
-		              url: 'http://phone.com'
-		            }
-    			]
-    		}
-    	}
-    }
-  }
+	components:{
+		slideShow
+	},
+	data () {
+	    return {
+	    	slideSpeed: 2000,
+		    slides: [
+		        {
+		          src: require('../assets/slideShow/pic1.jpg'),
+		          title: 'xxx1',
+		          href: 'detail/analysis'
+		        },
+		        {
+		          src: require('../assets/slideShow/pic2.jpg'),
+		          title: 'xxx2',
+		          href: 'detail/count'
+		        },
+		        {
+		          src: require('../assets/slideShow/pic3.jpg'),
+		          title: 'xxx3',
+		          href: 'http://xxx.xxx.com'
+		        },
+		        {
+		          src: require('../assets/slideShow/pic4.jpg'),
+		          title: 'xxx4',
+		          href: 'detail/forecast'
+		        }
+		    ],
+	    	boardList: [
+		        {
+		          title: '开放产品',
+		          description: '开放产品是一款开放产品',
+		          id: 'car',
+		          toKey: 'analysis',
+		          saleout: false
+		        },
+		        {
+		          title: '品牌营销',
+		          description: '品牌营销帮助你的产品更好地找到定位',
+		          id: 'earth',
+		          toKey: 'count',
+		          saleout: false
+		        },
+		        {
+		          title: '使命必达',
+		          description: '使命必达快速迭代永远保持最前端的速度',
+		          id: 'loud',
+		          toKey: 'forecast',
+		          saleout: true
+		        },
+		        {
+		          title: '勇攀高峰',
+		          description: '帮你勇闯高峰，到达事业的顶峰',
+		          id: 'hill',
+		          toKey: 'publish',
+		          saleout: false
+		        }
+		    ],
+			newsList:[
+				{
+	              title: '数据统计',
+	              url: 'http://starcraft.com'
+	            },
+	            {
+	              title: '数据预测',
+	              url: 'http://warcraft.com'
+	            },
+	            {
+	              title: '流量分析',
+	              url: 'http://overwatch.com',
+	              hot: true
+	            },
+	            {
+	              title: '广告发布',
+	              url: 'http://hearstone.com'
+	            }
+			],
+	    	productList:{
+	    		pc:{
+	    			title:"pc产品",
+	    			list:[
+		    			{
+			              name: '数据统计',
+			              url: 'http://starcraft.com'
+			            },
+			            {
+			              name: '数据预测',
+			              url: 'http://warcraft.com'
+			            },
+			            {
+			              name: '流量分析',
+			              url: 'http://overwatch.com',
+			              hot: true
+			            },
+			            {
+			              name: '广告发布',
+			              url: 'http://hearstone.com'
+			            }
+	    			]
+	    		},
+	    		app:{
+	    			title:"手机应用类",
+	    			last:true,
+	    			list:[
+		    			{
+			              name: '91助手',
+			              url: 'http://weixin.com'
+			            },
+			            {
+			              name: '产品助手',
+			              url: 'http://twitter.com',
+			              hot: true
+			            },
+			            {
+			              name: '智能地图',
+			              url: 'http://maps.com'
+			            },
+			            {
+			              name: '团队语音',
+			              url: 'http://phone.com'
+			            }
+	    			]
+	    		}
+	    	}
+	    }
+	  }
 }
 </script>
 
@@ -156,6 +241,9 @@ export default {
   font-size: 18px;
   font-weight: bold;
   color: #000;
+  margin-bottom: 15px;
+}
+.index-board-item p {
   margin-bottom: 15px;
 }
 .line-last {
